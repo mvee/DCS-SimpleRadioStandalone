@@ -147,6 +147,8 @@ LuaExportActivityNextEvent = function(tCurrent)
                     _update = SR.exportRadioFW190(_update)
                 elseif _update.unit == "Bf-109K-4" then
                     _update = SR.exportRadioBF109(_update)
+                elseif _update.unit == "SpitfireLFMkIX" then
+                    _update = SR.exportRadioSpitfireMkIX(_update)						
                 elseif _update.unit == "C-101EB" then
                     _update = SR.exportRadioC101(_update)
                 elseif _update.unit == "Hawk" then
@@ -1223,6 +1225,47 @@ function SR.exportRadioBF109(_data)
     _data.radios[2].modulation = 0
     _data.radios[2].volume = SR.getRadioVolume(0, 130,{0.0,1.0},false)
 
+    _data.selected = 1
+
+    -- Expansion Radio - Server Side Controlled
+    _data.radios[3].name = "AN/ARC-186(V)"
+    _data.radios[3].freq = 124.8*1000000 --116,00-151,975 MHz
+    _data.radios[3].modulation = 0
+    _data.radios[3].secFreq = 121.5*1000000
+    _data.radios[3].volume = 1.0
+    _data.radios[3].freqMin = 116*1000000
+    _data.radios[3].freqMax = 151.975*1000000
+    _data.radios[3].volMode = 1
+    _data.radios[3].freqMode = 1
+    _data.radios[3].expansion = true
+
+    -- Expansion Radio - Server Side Controlled
+    _data.radios[4].name = "AN/ARC-164 UHF"
+    _data.radios[4].freq = 251.0*1000000 --225-399.975 MHZ
+    _data.radios[4].modulation = 0
+    _data.radios[4].secFreq = 243.0*1000000
+    _data.radios[4].volume = 1.0
+    _data.radios[4].freqMin = 225*1000000
+    _data.radios[4].freqMax = 399.975*1000000
+    _data.radios[4].volMode = 1
+    _data.radios[4].freqMode = 1
+    _data.radios[4].expansion = true
+    _data.radios[4].encKey = 1
+    _data.radios[4].encMode = 1 -- FC3 Gui Toggle + Gui Enc key setting
+
+    _data.control = 0; -- hotas radio
+
+    return _data;
+end
+
+function SR.exportRadioSpitfireMkIX(_data)
+
+    _data.radios[2].name = "A.R.I. 1063"
+    _data.radios[2].freq =  SR.getRadioFrequency(15)
+    _data.radios[2].modulation = 0
+	_data.radios[2].volMode = 1
+    _data.radios[2].volume = 1.0
+	
     _data.selected = 1
 
     -- Expansion Radio - Server Side Controlled

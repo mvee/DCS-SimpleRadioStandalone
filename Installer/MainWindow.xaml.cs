@@ -576,7 +576,7 @@ namespace Installer
 
                 var end = dirs[dirs.Length - 1];
 
-                if (end.ToUpper().StartsWith("DCS.") || end.ToUpper().Equals("DCS"))
+                if (end.ToUpper().StartsWith("DCS.") || end.ToUpper().Equals("DCS"))  // It's possible to launch DCS.exe with -w <string> flag when the folder would not start with DCS. Maybe only check if Scripts is found in subfolder?
                 {
                     Logger.Info($"Found DCS Saved Games Path {directory}");
                     paths.Add(directory);
